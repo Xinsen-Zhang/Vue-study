@@ -81,3 +81,38 @@ props: {
 * 在 `vm`内绑定数据
 * `vm$on`监听事件
 * `vm$emit`触发事件
+
+
+#### 缺点
+* 貌似只能通过把组件放到一个文件中进行操作
+* 耦合度高
+
+
+### $children 和 $parent操作
+#### 思路
+* 通过 `vm.$children`获取子组件
+*  通过 `vm.$parent` 获取父组件
+
+
+#### 缺点
+* 很麻烦
+* 很 props 类似, 需要通过父子关系进行通信
+
+
+### pub-sub 机制
+#### 原理
+* 分发-订阅机制
+* 和 BUS 总线订阅的思路几乎一样
+* 使用插件的话能够得好很好的支持
+* 比如使用 `PubSub.js`插件
+* 此方式可实现任意关系组件间通信(数据)
+
+```javascript
+// 导入模块
+import PubSub from 'pubsub'
+// 在组件进入挂载的生命周期进行订阅
+PubSub.subscribe('deleteTodo', (msg, index) => {
+  this.todoItems.splice(index,1)
+})
+
+```
