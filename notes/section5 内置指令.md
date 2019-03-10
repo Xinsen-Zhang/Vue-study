@@ -89,3 +89,75 @@ TODO: 插入代码 4.filterBooks.html
 
 ## 方法与事件
 TODO: 插入代码 5. addClick.html
+* 可以传入参数`@click=addHandle(10)`
+* 可以不传入参数`@click=addHandle()`
+* 可以用回调函数的形式绑定事件`@click=addHandle`
+    * 此时函数会有一个参数`event`
+* Vue 提供了一个特殊的变量`$event`用于访问原生的 DOM 事件.
+```html
+<div id="app">
+    <a href="https://www.apple.cn" @click="handleClick('禁止跳转','hello world',$event)">apple.com</a>
+</div>
+<script>
+    const app = new Vue({
+        el: '#app',
+        methods: {
+            handleClick: function (message, welcome, event) {
+                console.log(arguments);
+                alert(message);
+                alert(welcome);
+                event.preventDefault();
+            }
+        }
+    })
+</script>
+```
+TODO: 插入代码 6.$event.html
+
+### 修饰符
+#### 事件修饰符
+* Vue 支持一下修饰符
+    * `.stop`
+    * `.prevent`
+    * `.capture`
+    * `.self`
+    * `.once`
+* 举例
+    * 组织单击事件冒泡
+        * `<a @click.stop="handle">....</a>`
+    * 提交事件但是不重载事件
+        * `<form @submit.prevent="handle">....</form>`
+    * 修饰键可以串联
+        *   `<a @click.stop.prevent="handle">....</a>`
+    * 添加事件监听时使用捕获模式
+        *  `<div @click.capture="handle">....</div>`
+    * 只当事件在该元素本身(不包括其子元素)触发时触发回调
+        * `<div @click.self="handle">....</div>`
+    * 只触发一次, 组件同样适用
+        * `<div @click.once="handle">....</div>`
+#### keycode
+* 只有在 keycode=13 时触发事件
+    * `<input @keyup.13="submit">`
+*  自己配置具体按键
+    * `Vue.config.keyCode.f1 = 112`
+        * @keyup.f1
+* 除了`keycode`之外还有其他的一些快捷键
+    * `.enter`
+    * `.tab`
+    * `.delete`
+        * 捕获"删除"和"退格"键
+    * `.esc`
+    * `.sapce`
+    * `.up`
+    * `.down`
+    * `.left`
+    * `.right`
+    * `.ctrl`
+    * `.alt`
+    * `.shift`
+    * `.meta`
+* 例子
+    * shift + s
+        * `<input @keyup.shift.83 = 'handleSave' />`
+    * control + click
+        * `<div @click.ctrl="doSomething">...</div>`

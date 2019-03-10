@@ -10,8 +10,15 @@
 <body>
     <div id="app">
         <p>{{counter}}</p>
-        <div><button @lcick="handleAdd()"> + 1</button></div>
-        <div><button @lcick="handleAdd(10)"> + 10</button></div>
+        <div>
+            <button @click="handleAdd()"> + 1</button>
+        </div>
+        <div>
+            <button @click="handleAdd(10)"> + 10</button>
+        </div>
+        <div>
+            <button @click="handleAdd"> 没有传入参数,直接用回调函数的方式定义的方法</button>
+        </div>
     </div>
     <script>
         const app = new Vue({
@@ -21,7 +28,8 @@
             },
             methods: {
                 handleAdd: function (count) {
-                    // console.log(arguments);
+                    console.log(arguments);
+                    // 可能没有传入参数
                     count = count || 1;
                     this.counter += count;
                 }

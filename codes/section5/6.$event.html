@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <title>$event</title>
+</head>
+<body>
+    <div id="app">
+        <a href="https://www.apple.cn" @click="handleClick('禁止跳转','hello world',$event)">apple.com</a>
+    </div>
+    <script>
+        const app = new Vue({
+            el: '#app',
+            methods: {
+                handleClick: function (message, welcome, event) {
+                    console.log(arguments);
+                    alert(message);
+                    alert(welcome);
+                    event.preventDefault();
+                }
+            }
+        })
+    </script>
+</body>
+</html>
