@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <title>数组的过滤</title>
+</head>
+<body>
+    <div id="app">
+        <ul>
+            <template v-for="(book, index) in filterBooks" :key="index">
+                <!-- TODO: v-for 的使用和计算属性的插入 -->
+                    <li>书名: {{book.name}}</li>
+                    <li>作者: {{book.author}}</li>
+                    <hr/>
+            </template>
+        </ul>
+    </div>
+    <script>
+        const app = new Vue({
+            el: "#app",
+            data: {
+                books: [
+                    {
+                        name: 'Vue',
+                        author: 'ZHANG'
+                    },
+                    {
+                        name: 'javascript',
+                        author: 'ZHANG'
+                    },
+                    {
+                        name: 'java',
+                        author: 'ZHANG'
+                    }
+                ]
+            },
+            computed: {
+                filterBooks: function () {
+                    return this.books.filter(function (book) {
+                        return /java/.test(book['name']);
+                    })
+                }
+            }
+        })
+    </script>
+</body>
+</html>

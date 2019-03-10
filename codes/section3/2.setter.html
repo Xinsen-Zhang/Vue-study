@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>3. 计算属性的 getter 和 setter </title>
+</head>
+<body>
+    <div id="app">
+        <div>
+            <input type="text" name="firstname" v-model="firstName">
+        </div>
+        <div>
+            <input type="text" name="lastname" v-model="lastName">
+        </div>
+        <div>
+            {{fullName}}
+        </div>
+    </div>
+    <script>
+    const app = new Vue({
+        el: '#app',
+        data: {
+            firstName: 'jason',
+            lastName: 'zhang'
+        },
+        computed: {
+            fullName: {
+                get: function () {
+                    return this.firstName + ' ' + this.lastName;
+                },
+                set: function (value) {
+                    this.firstName = value.split(' ')[0];
+                    this.lastName = value.split(' ')[1];
+                }
+            }
+        },
+        mounted: function () {
+            const this_ = this;
+            setInterval(function () {
+                this_.fullName = 'Flora Xu';
+            }, 5000);
+        }
+    })
+    </script>
+</body>
+</html>

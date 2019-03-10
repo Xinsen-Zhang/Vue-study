@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>4. filters</title>
+</head>
+<body>
+    <div id="app">
+        <h1>{{date | formatDate}}</h1>
+    </div>
+    <script>
+        var padDate = function (value) {
+            return value < 10 ? '0' + value : value;
+        }
+        const app = new Vue({
+            el: '#app',
+            data: {
+                date: new Date(),
+                timer: null,
+            },
+            filters: {
+                formatDate: function (value) {
+                    const date = new Date(value);
+                    const year = date.getFullYear();
+                    const month = padDate(date.getMonth() + 1);
+                    const day = padDate(date.getDate());
+                    const hour = padDate(date.getHours());
+                    const minute = padDate(date.getMinutes());
+                    const second = padDate(date.getSeconds());
+                    return year + '-' + month + '-' + day + ' ' + hour + ':' + minute + ':' + second
+                }
+            },
+            mounted: function () {
+                let this_ = this
+                this.timer = setInterval(function () {
+                    this_.date = new Date();
+                }, 1000)
+            }
+        })
+    </script>
+</body>
+</html>

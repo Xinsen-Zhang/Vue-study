@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>fast in v-bind</title>
+</head>
+<body>
+    <div id="app">
+        <a :href="url">图片链接</a>
+        <img :src="image" alt="ins 上 hottest cat 的图片" />
+    </div>
+    <script>
+    const app = new Vue({
+        el: '#app',
+        data: {
+            images: ['http://39.107.99.64:9999/ins/cat/hottest/image/2019-03-06/Bup4EObHWwZ.png', 'http://39.107.99.64:9999/ins/cat/hottest/image/2019-03-06/Bup7Bz2gSI1.png', 'http://39.107.99.64:9999/ins/cat/hottest/image/2019-03-06/BupfJlNFiax.png', 'http://39.107.99.64:9999/ins/cat/hottest/image/2019-03-06/Bupg-LMH9i-.png', 'http://39.107.99.64:9999/ins/cat/hottest/image/2019-03-06/BuplnK5HnGk.png', 'http://39.107.99.64:9999/ins/cat/hottest/image/2019-03-06/Bupmauag-wA.png', 'http://39.107.99.64:9999/ins/cat/hottest/image/2019-03-06/Bupreg_hNvs.png', 'http://39.107.99.64:9999/ins/cat/hottest/image/2019-03-06/BupupHuhM4a.png', 'http://39.107.99.64:9999/ins/cat/hottest/image/2019-03-06/BupzYKXjHxd.png'],
+            urls: ['http://39.107.99.64:9999/ins/cat/hottest/image/2019-03-06/Bup4EObHWwZ.png', 'http://39.107.99.64:9999/ins/cat/hottest/image/2019-03-06/Bup7Bz2gSI1.png', 'http://39.107.99.64:9999/ins/cat/hottest/image/2019-03-06/BupfJlNFiax.png', 'http://39.107.99.64:9999/ins/cat/hottest/image/2019-03-06/Bupg-LMH9i-.png', 'http://39.107.99.64:9999/ins/cat/hottest/image/2019-03-06/BuplnK5HnGk.png', 'http://39.107.99.64:9999/ins/cat/hottest/image/2019-03-06/Bupmauag-wA.png', 'http://39.107.99.64:9999/ins/cat/hottest/image/2019-03-06/Bupreg_hNvs.png', 'http://39.107.99.64:9999/ins/cat/hottest/image/2019-03-06/BupupHuhM4a.png', 'http://39.107.99.64:9999/ins/cat/hottest/image/2019-03-06/BupzYKXjHxd.png'],
+            url: 'http://39.107.99.64:9999/ins/cat/hottest/image/2019-03-06/Bup4EObHWwZ.png',
+            image: 'http://39.107.99.64:9999/ins/cat/hottest/image/2019-03-06/Bup4EObHWwZ.png',
+            timer: null,
+        },
+        mounted: function () {
+            let this_ = this;
+            let length = this.images.length
+            this.timer = setInterval(function () {
+                let index = Math.floor(Math.random() * length);
+                this_.image = this_.images[index];
+                this_.url = this_.urls[index];
+            }, 3000)
+        }
+    })
+    </script>
+</body>
+</html>

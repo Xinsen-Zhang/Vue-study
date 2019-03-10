@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>3. 插值内容也可以是一些简单的 JS 表达式</title>
+</head>
+<body>
+    <div id="app">
+        <h3>{{number}}</h3>
+        <h3>{{isOK? '确定': '取消'}}</h3>
+        <h3>{{text.split(',').reverse().join(',')}}</h3>
+    </div>
+    <script>
+    const app = new Vue({
+        el: '#app',
+        data: {
+            number: 1000,
+            isOK: false,
+            text: '123456',
+        }
+    })
+    </script>
+</body>
+</html>

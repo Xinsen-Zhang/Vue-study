@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>2. 对象的绑定</title>
+</head>
+<body>
+    <div id="app" :class='{"active": isActive}'></div>
+    <script>
+    const app = new Vue({
+        el: "#app",
+        data: {
+            isActive: true
+        },
+        mounted: function () {
+            console.log(arguments);
+            const this_ = this;
+            setInterval(function () {
+                this_.isActive = !this_.isActive;
+            }, 1000)
+        }
+    })
+    </script>
+</body>
+</html>
