@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>textarea 与 v-model</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <textarea placeholder="请输入...." v-model="message"></textarea>
+        <p>输入的内容是</p>
+        <p style="white-space: pre">{{message}}</p>
+    </div>
+    <script>
+        const app = new Vue({
+            el: '#app',
+            data: {
+                message: ''
+            }
+        })
+    </script>
+</body>
+</html>

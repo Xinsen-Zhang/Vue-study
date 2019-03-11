@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>12. 选择列表中选中的数据动态绑定</title>
+</head>
+<body>
+    <div id="app">
+        <select v-model="selected">
+            <option :value="value1">010</option>
+            <option :value="value2">101</option>
+        </select>
+        <p>选择的是</p>
+        <p style="white-space: pre">{{selected}}</p>
+    </div>
+    <!-- js 脚本 -->
+    <script>
+        const app = new Vue({
+            el: '#app',
+            data: {
+                selected: '',
+                value1: 0,
+                value2: 1
+            },
+            watch: {
+                selected: function (newValue, oldValue) {
+                    console.log(newValue);
+                }
+            },
+        })
+    </script>
+</body>
+</html>

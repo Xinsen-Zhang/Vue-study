@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>单独使用单选的时候</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <input type="radio" :checked="picked" id="radio" @click="togglePicked">
+        <label for="radio">单选按钮</label>
+    </div>
+    <script>
+        const app = new Vue({
+            el: '#app',
+            data: {
+                picked: true
+            },
+            methods: {
+                togglePicked: function () {
+                    this.picked = !this.picked;
+                }
+            }
+        })
+    </script>
+</body>
+</html>

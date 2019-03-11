@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>input:radio 的互斥效果</title>
+</head>
+<body>
+    <div id="app">
+        <input type="radio" name="JS" value="JS" id="JS" v-model="picked">
+        <label for="JS">JS</label>
+        <br/>
+        <input type="radio" name="HTML" value="HTML" id="HTML" v-model="picked">
+        <label for="JS">HTML</label>
+        <br/>
+        <input type="radio" name="CSS" value="CSS" id="CSS" v-model="picked">
+        <label for="JS">CSS</label>
+        <p>选中的内容是</p>
+        <p style="white-space: pre">{{picked}}</p>
+    </div>
+    <script>
+        const app = new Vue({
+            el: '#app',
+            data: {
+                picked: 'js'
+            }
+        })
+    </script>
+</body>
+</html>
