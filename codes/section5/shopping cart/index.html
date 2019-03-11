@@ -1,0 +1,64 @@
+<!-- 引入资源及模板 -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>购物车</title>
+</head>
+<body>
+    <div id="app" v-cloak>
+        <!-- 验证购物车是否为空 -->
+            <!-- 显示购物车的内容 -->
+        <template v-if="list.length">
+            <!-- 用表格显示 -->
+            <table>
+                <!-- 表格每一列的名称 -->
+                <thead>
+                    <tr>
+                        <!-- 商品名称, 商品单价, 购买数量, 操作 -->
+                        <th></th>
+                        <th>商品名称</th>
+                        <th>商品单价</th>
+                        <th>购买数量</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <!-- 表格的主题内容 -->
+                <tbody>
+                    <!-- 使用 v-for 显示每一行的内容 -->
+                    <tr v-for="(item, index) in list" :key="item.id">
+                        <!-- 索引 -->
+                        <td>{{index + 1}}</td>
+                        <!-- 商品名称 -->
+                        <td>{{item.name}}</td>
+                        <!-- 商品单价 -->
+                        <td>{{item.price}}</td>
+                        <!-- 购买数量 -->
+                        <td>
+                            <!-- 减少购买数量 -->
+                            <button @click="handleReduce(index)" :disabled="item.count === 1">-</button>
+                            {{item.count}}
+                            <!-- 增加购买数量 -->
+                            <button @click="handleAdd(index)">+</button>
+                        </td>
+                        <!-- 移除操作 -->
+                        <td>
+                            <button @click="handleRemove(index)">移除</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <!-- 显示总价 -->
+            <div>总价: {{totalPrice}}</div>
+        </template>
+            <!-- 购物车的内容为空 -->
+        <template v-else>
+            购物车为空
+        </template>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="./index.js"></script>
+</body>
+</html>
