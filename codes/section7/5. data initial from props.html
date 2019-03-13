@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>从 props 中获取 data 的初始值进行保存</title>
+</head>
+<body>
+    <div id="app">
+        <my-component :initial-count="initialData"></my-component>
+    </div>
+    <script>
+        // 注册组件
+        Vue.component('my-component', {
+            props: ['initialCount'],
+            template: '<div>{{count}}</div>',
+            data: function () {
+                return {
+                    count: this.initialCount
+                }
+            }
+        })
+        // 实例化 Vue 对象
+        const app = new Vue({
+            el: '#app',
+            data: {
+                initialData: 1
+            }
+        })
+    </script>
+</body>
+</html>
