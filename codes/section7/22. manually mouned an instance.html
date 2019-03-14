@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>手动挂载实例</title>
+</head>
+<body>
+    <div id="app">
+    </div>
+
+    <!-- x-templates -->
+    <script type="text/x-template" id="template">
+        <div>
+                <div>手动挂载的实例内容</div>
+                <p>{{name}}</p>
+        </div>
+    </script>
+
+    <!-- js -->
+    <script>
+        const MyComponent = Vue.extend(
+            {
+                template: '#template',
+                data: function () {
+                    return {
+                        name: '仙女'
+                    }
+                }
+            }
+        )
+        // mounted
+        new MyComponent().$mount('#app')
+    </script>
+</body>
+</html>

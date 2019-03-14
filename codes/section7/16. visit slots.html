@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>    
+    <title>slot的访问</title>
+</head>
+<body>
+    <div id="app">
+        <component-a>
+            <h2 slot="header">标题</h2>
+            <p>正文内容</p>
+            <p>更多正文内容</p>
+            <div slot="footer">底部内容</div>
+        </component-a>
+    </div>
+
+    <script>
+        Vue.component('component-a', {
+            template: `
+            <div class="container">
+                <div class="header">
+                    <slot name="header"></slot>
+                </div>
+                <div class="content">
+                    <slot></slot>
+                </div>
+                <div class="footer">
+                    <slot name="footer"></slot>
+                </div>
+            </div>
+            `,
+            mounted: function () {
+                const header = this.$slots.header
+                const main = this.$slots.default
+                const footer = this.$slots.footer
+                console.log(header)
+                console.log(main)
+                console.log(footer)
+            }
+        })
+
+        const app = new Vue({
+            el: '#app'
+        })
+    </script>
+</body>
+</html>

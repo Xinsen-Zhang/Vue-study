@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>组件的递归调用</title>
+</head>
+<body>
+    <div id="app">
+        <my-component :count="count"></my-component>
+    </div>
+
+    <script>
+        Vue.component('my-component', {
+            name: 'my-a',
+            props: {
+                count: {
+                    type: Number,
+                    default: 1
+                }
+            },
+            template: `
+            <div class="child-component">
+                <p>{{count}}</p>
+                <my-a v-if="count < 3" :count="count+1"></my-a>
+            </div>
+            `
+        })
+
+        const app = new Vue({
+            el: '#app',
+            data: {
+                count: 1
+            }
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>中央事件总线</title>
+</head>
+<body>
+    <div id="app">
+        {{message}}
+        <my-component-a></my-component-a>
+    </div>
+    <script>
+        // bus
+        const bus = new Vue()
+        // component register
+        Vue.component('my-component-a', {
+            template: '<button @click="handleEvent">传递事件</button>',
+            methods: {
+                handleEvent: function () {
+                    bus.$emit('on-message', '来自 component-a 的内容')
+                }
+            }
+        })
+        // instance
+        const app = new Vue({
+            el: '#app',
+            data: {
+                message: ''
+            },
+            mounted: function () {
+                const this_ = this
+                bus.$on('on-message', function (message) {
+                    this_.message = message
+                })
+            }
+        })
+    </script>
+</body>
+</html>

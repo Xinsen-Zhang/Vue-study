@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>动态切换组件</title>
+</head>
+<body>
+    <div id="app">
+        <component :is="currentView"></component>
+        <button @click="handleClick('A')">切换到 A </button>
+        <button @click="handleClick('B')">切换到 B </button>
+        <button @click="handleClick('C')">切换到 C </button>
+    </div>
+
+    <script>
+        // 全局注册组件
+        Vue.component('comA', {
+            template: '<div>组件 A</div>'
+        })
+
+        Vue.component('comB', {
+            template: '<div>组件 B</div>'
+        })
+
+        const app = new Vue({
+            el: '#app',
+            data: {
+                currentView: 'comA'
+            },
+            methods: {
+                handleClick(value){
+                    this.currentView = 'com' + value
+                }
+            },
+            components: {
+                comC: {
+                    template: '<div>组件 C</div>'
+                }
+            }
+        })
+    </script>
+</body>
+</html>

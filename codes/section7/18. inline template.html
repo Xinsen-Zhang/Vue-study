@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>内敛模板使用</title>
+</head>
+<body>
+    <div id="app">
+        <component-a inline-template>
+            <div class="info">
+                    <p>姓名: {{name}}</p>
+                    <p>性别: {{ gender}}</p>
+                    <p> 年龄: {{age}}岁</p>
+            </div>
+        </component-a>
+    </div>
+
+    <script>
+        Vue.component('component-a', {
+            // name:'component-a',
+            data: function () {
+                return {
+                    name: '仙女',
+                    gender: '女',
+                    age: 16
+                }
+            }
+        })
+
+        const app = new Vue({
+            el: '#app',
+
+        })
+    </script>
+</body>
+</html>

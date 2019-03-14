@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>通过父链进行通信</title>
+</head>
+<body>
+    <div id="app">
+        {{message}}
+        <my-component-a></my-component-a>
+    </div>
+    <script>
+        Vue.component('my-component-a', {
+            template: '<button @click="handleEvent">传递事件</button>',
+            methods: {
+                handleEvent: function () {
+                    this.$parent.message = '从 component-a 传递来的元素'
+                }
+            }
+        })
+
+        const app = new Vue({
+            el: '#app',
+            data: {
+                message: ""
+            }
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>带作用域的插槽</title>
+</head>
+<body>
+    <div id="app">
+        <component-a>
+            <template slot-scope="propsA">
+                <p>父组件的内容</p>
+                <p>{{propsA.message}}</p>
+            </template>
+        </component-a>
+        <component-b :books="books">
+            <template slot-scope="propsB" slot="book">
+                    <li>{{propsB.bookName}}</li>
+            </template>
+        </component-b>
+    </div>
+    <script>
+        Vue.component('component-a', {
+            template: `
+                <div class="container">
+                    <slot message="子组件的内容"></slot>
+                </div>
+            `
+        })
+
+        Vue.component('component-b', {
+            props: {
+                books: {
+                    type: Array,
+                    default: function () {
+                        return []
+                    }
+                }
+            },
+            template: `
+                <ul>
+                    <slot name="book" v-for="book in books" 
+                    :book-name="book.name">
+                        <p>备用分发的内容</p>    
+                    </slot>
+                </ul>
+            `
+        })
+
+        const app = new Vue({
+            el: '#app',
+            data: {
+                books: [
+                    {
+                        name: 'Vue 实战'
+                    },
+                    {
+                        name: 'JS 实战'
+                    },
+                    {
+                        name: 'ES6 实战'
+                    }
+                ]
+            }
+        })
+    </script>
+</body>
+</html>

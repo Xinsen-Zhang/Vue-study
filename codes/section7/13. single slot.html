@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>单个 slot 的使用</title>
+</head>
+<body>
+    <div id="app">
+        <my-component>
+            <p v-if="showPub">分发的内容</p>
+            <p v-if="showPub">更多分发的内容</p>
+        </my-component>
+        <button @click="toggleStatus">切换分发状态</button>
+        <p>
+            {{message}}
+        </p>
+    </div>
+    <script>
+        // 注册组件
+        Vue.component('my-component', {
+            template: `
+            <div>
+                <slot>
+                    <p>
+                        如果没有分发的内容, 我会被显示出来
+                    </p>
+                </slot>
+            </div>
+            `
+        })
+
+        // 实例化对象
+        const app = new Vue({
+            el: '#app',
+            data: {
+                showPub: true,
+                message: '有分发的内容'
+            },
+            methods:{
+                toggleStatus: function () {
+                    this.showPub = !this.showPub
+                }
+            },
+            watch: {
+                showPub: function (newValue) {
+                    if (newValue) {
+                        this.message = '有分发的内容'
+                    }
+                    else {
+                        this.message = '没有分发的内容'
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+</html>
