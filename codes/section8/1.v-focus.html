@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>v-focus</title>
+</head>
+<body>
+    <div id="app">
+        <label for="text">信息</label>
+        <input type="text" v-focus id="text" placeholder="请输入文本" />
+    </div>
+
+    <script>
+        Vue.directive('focus', {
+            inserted: function(el) {
+                // console.log(arguments)
+                console.log(arguments)
+                el.focus();
+            }
+        })
+
+        const app = new Vue({
+            el: '#app'
+        })
+    </script>
+</body>
+</html>
