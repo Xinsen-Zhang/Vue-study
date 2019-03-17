@@ -15,6 +15,6 @@ def calculate_token(path):
     return '{}{}'.format(base, url)
 
 if __name__ == '__main__':
-    path = '/ins/cat/hottest/video/2019-03-12/Bu6LtMzh22C.mp4'
+    path = '/ins/cat/latest/video/2019-03-17/BvFkbE9HqpU.mp4'
     url = calculate_token(path)
     print(url)
