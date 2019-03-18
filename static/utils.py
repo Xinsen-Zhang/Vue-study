@@ -28,12 +28,14 @@ def get_data_by_category(category= "hottest"):
     """
     return 'category="{}"'.format(category)
 
-def sort_data(field= "lastModified", order="DESC"):
+def sort_data(field= None, order="DESC"):
     """ 利用特定的字段和顺序对数据进行排序
     param field(str) : 字段, 可以是'lastModified', 'contentLength' 或者其他的
     param order(str) : 顺序, "DESC" 表示降序, "ASC" 表示升序
     return (str) : sql 的排序语句
     """
+    if field == None:
+        return ''
     return "ORDER BY {} {}".format(field, order)
 
 def limitation(num=None):
@@ -94,16 +96,64 @@ class MySQL(object):
         """
         self.connection.ping(True)
         self.cursor.execute(select_query)
-        result = self.cursor.fetchall()
-        pass
+        select_query_ = select_query
+        keys = []
+        if '*' in select_query:
+            keys.append('topic')
+            keys.append('category')
+            keys.append('lastModified')
+            keys.append('path')
+            keys.append('size')
+            keys.append('contentLength')
+            keys.append('type')
+        else:
+            if 'WHERE' in select_query:
+                select_query = select_query.split('WHERE')[0]
+            if 'ORDER' in select_query:
+                select_query = select_query.split('ORDER')[0]
+            if 'LIMIT' in select_query:
+                select_query = select_query.split('LIMIT')[0]
+            select_query = select_query.lower()
+            pass
+            # TODO: fields 的判断和键入
+        # 数组保存结果
+        result_ = []
+        if all:
+            result = self.cursor.fetchall()
+            num = len(result)
+            for i in range(num):
+                record = result[i]
+                item = {}
+                length = len(record)
+                for j in range(length):
+                    item[keys[j]] = record[j]
+                result_.append(item)
+        else:
+            result = self.cursor.fetchone()
+            num = len(result)
+            item = {}
+            for i in range(num):
+                item[keys[i]] = result[i]
+            result_.append(item)
+        num = len(result_)
+        for i in range(num):
+            result_[i]['cdn_link'] = calculate_token(result_[i]['path'])
+        return result_
+
 
 if __name__ == "__main__":
-    lastModified_condition = get_data_by_date()
-    type_condition = get_data_by_type()
-    category_condition = get_data_by_category()
-    order_by = sort_data()
+    lastModified_condition = get_data_by_date('2019-03-17')
+    type_condition = get_data_by_type('video')
+    category_condition = get_data_by_category('hottest')
+    order_by = sort_data('contentLength')
     limit = limitation()
-    sql = "select * from `COS` where {} and {} and {} {} {}".format(lastModified_condition, type_condition, category_condition, order_by, limit)
+    sql = "select * from `COS` where {} and {} and {} {} {}".format(
+        lastModified_condition, type_condition, category_condition, order_by, limit
+        )
     SQL = MySQL()
-    MySQL.fetch_data(select_query= sql, all= True)
-    MySQL.close_connection()
+    fetch_data = SQL.fetch_data(select_query= sql, all= True)
+    SQL.close_connection()
+    for record in fetch_data:
+        for k,v in record.items():
+            print('{}: {}'.format(k, v))
+            print('-' * 10)
