@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>使用函数化组件进行智能选择</title>
+</head>
+<body>
+    <div id="app">
+        <ele></ele>
+        <button @click="changeItem('image')"> 切换组件为图片组件</button>
+        <button @click="changeItem('video')"> 切换组件为视频组件</button>
+        <button @click="changeItem('text')"> 切换组件为纯文本组件</button>
+    </div>
+    <!-- TODO: 将11.js 改名 -->
+    <script src="./11.js"></script>
+</body>
+</html>

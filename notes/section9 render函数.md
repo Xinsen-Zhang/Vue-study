@@ -2,7 +2,7 @@
 <!-- TODO: 2. createElement 中的 props 和组件中直接使用的 props 之间的区别 -->
 
 <!-- TOC -->
-- [第九章 render 函数](#%E7%AC%AC%E4%B9%9D%E7%AB%A0-render-%E5%87%BD%E6%95%B0)
+<!-- - [第九章 render 函数](#%E7%AC%AC%E4%B9%9D%E7%AB%A0-render-%E5%87%BD%E6%95%B0)
   - [什么是Virtual DOM](#%E4%BB%80%E4%B9%88%E6%98%AFvirtual-dom)
     - [VNode](#vnode)
       - [tag](#tag)
@@ -31,6 +31,10 @@
     - [使用 JS 代替模板功能](#%E4%BD%BF%E7%94%A8-js-%E4%BB%A3%E6%9B%BF%E6%A8%A1%E6%9D%BF%E5%8A%9F%E8%83%BD)
       - [`v-if`](#v-if)
       - [v-for](#v-for)
+      - [v-model](#v-model)
+      - [修饰符](#%E4%BF%AE%E9%A5%B0%E7%AC%A6)
+      - [slot 的备用分发内容](#slot-%E7%9A%84%E5%A4%87%E7%94%A8%E5%88%86%E5%8F%91%E5%86%85%E5%AE%B9)
+  - [函数化组件](#%E5%87%BD%E6%95%B0%E5%8C%96%E7%BB%84%E4%BB%B6) -->
 
 # 第九章 render 函数
 ## 什么是Virtual DOM
@@ -512,3 +516,34 @@ const app = new Vue({
 })
 </script>
 ```
+#### v-model
+`render`里面也没有 `v-model`的api
+#### 修饰符
+修饰符也无法使用, 需要使用句柄
+<!-- TODO: 事件冒泡和事件捕获 -->
+
+- [ ] 事件冒泡和事件捕获 
+
+| 修饰符 | 句柄 | 说明|
+|-------|------|----|
+|.stop|event.stopPropagation|阻止事件冒泡|
+|.prevent|event.preventDefault|阻止默认事件|
+|.self|if(event.target !== event.currentTarget) reuturn ; | 事件恰好是自身时触发|
+|.enter,.13| if(event.keyCode !== 13) return ; | 按下回车键的时候触发 |
+|.ctrl, .alt, .shift, .meta | if(!event.ctrlKey) return ; 可替换按键 | 按下特殊按键的时候触发|
+|.capture | ! | 事件捕获|
+|.once | ~ | 只触发一次 |
+|.capture.once 或者 .once.capture | ~! | 第一次事件捕获时触发 |
+<!-- TODO: 插入代码 9. chatting imitation.html -->
+#### slot 的备用分发内容
+如果slot为空, 在使用 `template` 的时候,可以在 `template` 中添加默认分发的备用内容. 可是如果使用`render`的话, 需要使用 js 进行逻辑判断, 不能直接定义备用的分发内容了
+* `this.$slots.default === undefined` => 组件中, 未命名的(默认) slot 没有被使用
+<!-- TODO: 插入代码 10. spare dispatch content in slot.html -->
+
+
+## 函数化组件
+* Vue.js 提供了一个 `functional` 的布尔值, 设置为 `true` 时可以使组件无状态和无实例, 也就是没有 `data` 和 `this` 上下文. 这样用 `render` 函数返回虚拟节点可以更容易渲染, 因为函数化组件只是一个函数, 渲染开销要小很多
+* 在使用函数化组件的时候, `render` 函数提供饿了第二个参数`context`来提供临时上下文. 组件需要的`data`, `props`, `parent`, `children`, `slot`都是通过这个上下文来进行传递的.e.g. 
+  * `this.level` => `context.props.level`
+  * `this.$slots.default` => `context.children`
+<!-- TODO: 插入代码链接 11. select component via data inteligently.html -->

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>v-model 在 render 中的实现</title>
+</head>
+<body>
+    <div id="app">
+        <ele></ele>
+    </div>
+    <script>
+        Vue.component('ele', {
+            render: function (createElement) {
+                const this_ = this
+                return createElement('div', [
+                    createElement('input', {
+                        attrs: {
+                            type: 'text'
+                        },
+                        on: {
+                            input: function (event) {
+                                this_.value = event.target.value
+                            }
+                        },
+                        domProps: {
+                            value: this.value
+                        }
+                    }),
+                    createElement('p', this.value)
+                ])
+            },
+            data: function () {
+                return {
+                    value: ''
+                }
+            }
+        })
+
+        const app = new Vue({
+            el: '#app'
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>简单聊天功能的实现</title>
+</head>
+<body>
+    <div id="app">
+        <ele></ele>
+    </div>
+    <script>
+        // 组件的注册
+        Vue.component('ele', {
+            render(h) {
+                // 使用中间变量保存上下文 this
+                const this_ = this
+                // list 保存消息记录,Array
+                if (this.list.length) {
+                    var listNode = h('ul', this.list.map(function (item) {
+                        return h('li', item)
+                    }))
+                } else {
+                    var listNode = h('p', '暂无聊天内容')
+                }
+                return h('div', [
+                    listNode,
+                    h('input', {
+                        attrs: {
+                            placeholder: '输入内容, 回车键发送'
+                        },
+                        style: {
+                            width: '200px'
+                        },
+                        on: {
+                            keyup: function (event) {
+                                // 如果不是回车键, 不发送消息
+                                if(event.keyCode !== 13) {
+                                    return ;
+                                }
+                                else {
+                                    // 添加内容到聊天列表中
+                                    this_.list.push(event.target.value)
+                                    // 清空输入框内的信息
+                                    event.target.value = ''
+                                }
+                            }
+                        }
+                    }),
+                    h('button', {
+                        domProps: {
+                            innerText: '清空聊天记录'
+                        },
+                        on: {
+                            click: function () {
+                                this_.list = []
+                                // this_.list.splice(0, this.list.length)
+                            }
+                        }
+                    })
+                ])
+            },
+            data: function () {
+                return {
+                    list: []
+                }
+            }
+        })
+        // 实例化
+        const app = new Vue({
+            el: '#app'
+        })
+    </script>
+</body>
+</html>
