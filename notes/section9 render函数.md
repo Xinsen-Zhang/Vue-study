@@ -278,20 +278,112 @@ Vue.component('ele', {
 ```JavaScript
 // 组件选项
 var child = {
-    render: function (createElement) {
-        return createElement('p', 'text')
-    }
+  render: function (createElement) {
+      return createElement('p', 'text')
+  }
 }
 // 注册组件
 Vue.component('ele', {
-    render: function (createElement) {
-        // 创建一个子节点, 使用组件
-        const childNode = createElement(child)
-        return createElment('div', [childNode, childNode])
-    }
+  render: function (createElement) {
+    // 创建一个子节点, 使用组件
+    const childNode = createElement(child)
+    return createElment('div', [childNode, childNode])
+  }
 })
 // 实例化组件
 const app = new Vue({
+  el: '#app'
+})
+```
+* 错误2. 重复使用带有组件的 slot
+```html
+<div id="#app">
+  <ele>
+  <!-- render 需要在组件里面 -->
+    <div>
+    <!-- slot -->
+      <child></child> <!--组件-->
+    </div>
+  <ele>
+</div>
+
+<script>
+// 全局注册组件 child  正确的使用
+  Vue.component('child', {
+    render: function (createElement) {
+      return createElement('p', 'text')
+    }
+  })
+
+  // 现在开始错误的使用 render
+  Vue.component('ele', {
+    render: function (createElement) {
+      return createElement('div', [this.$slots.default,
+      this.$slots.default])
+    }
+  })
+
+// 实例化
+  const app = new Vue({
     el: '#app'
+  })
+</script>
+```
+
+关于上面的问题的解决方法
+* 重复的组件作为 VNode []
+  * 使用`Array.apply(null, {length:5}).map(....)`
+```JavaScript
+var child = {
+  render: function (createElement) {
+    return createElement('p', 'text')
+  }
+}
+Vue.component('ele', {
+  render: function (createElement) {
+    return createElement('div', Array.apply(null, {length: 2}).map(function () {
+      return createElement(child)
+    }))
+  }
+})
+var app = new Vue({
+  el: '#app'
+})
+```
+* 带组件的 slot
+  * 深度克隆节点.(其实就是为了不让数组里指向同一个引用)
+```JavaScript
+Vue.component('child', {
+  render: function (createElement) {
+    return createElement('p', 'text')
+  }
+})
+
+Vue.component('ele', {
+  render:function (createElement) {
+    // 深度克隆 slot 节点
+    function cloneVNode(VNode):
+    var child = VNode.children && VNode.children.map(function (vnode) {
+      return cloneNode(vnode)
+    })
+    const cloned = createElement(
+      VNode.tag,
+      VNode.data,
+      child
+    )
+    cloned.text = VNode.text
+    cloned.isComment = VNode.isComment
+    cloned.componentOptions = VNode.componentOptions
+    cloned.elm = VNode.elm
+    cloned.context = VNode.context
+    cloned.ns = VNode.ns
+    cloned.isStatic = VNode.isStatic
+    cloned.key = VNode.key
+
+    return cloned
+  }
+  const vNodes = this.$slots.default
+  const clonedNodes = cloneVNode(vNodes)
+  return createElement('div', [vNodes, clonedNodes])
 })
 ```
