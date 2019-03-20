@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>v-for的使用</title>
+</head>
+<body>
+     <div id="app">
+         <ele :list="list"></ele>
+         <button @click= 'handleClick'>切换 list</button>
+     </div>
+</body>
+<script>
+    const list1 = []
+    const list2 = [
+                'Vue.js 实战',
+                'JS 实战',
+                'python 实战'
+            ]
+    Vue.component('ele', {
+        props: {
+            list: {
+                type: Array,
+                default: function () {
+                    return []
+                }
+            }
+        },
+        render: function (createElement) {
+            if(this.list.length){
+                nodes = this.list.map(function (item) {
+                    return createElement('p', item)
+                })
+                return createElement('ul', nodes)
+            }
+            else {
+                return createElement('p', '列表为空')
+            }
+        }
+    })
+    const app = new Vue({
+        el: '#app',
+        data: {
+            list: list1
+        },
+        methods: {
+            handleClick: function () {
+                if (this.list === list1) {
+                    this.list = list2
+                }
+                else {
+                    this.list = list1
+                }
+            }
+        }
+    })
+</script>
+</html>

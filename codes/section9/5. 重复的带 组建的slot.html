@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>重复的带组件的 slot</title>
+</head>
+<body>
+    <div id="app">
+        <ele>
+            <div>
+                <child></child>
+            </div>
+        </ele>
+    </div>
+</body>
+
+<script>
+    // 健康的注册组件, child
+    Vue.component('child', {
+        render: function (createElement) {
+            return createElement('p', 'text')
+        }
+    })
+    // 注册组件 ele
+    Vue.component('ele', {
+        render: function (createElement) {
+            function cloneVNode(VNode) {
+                // 对所有的子节点递归, 得到一个数组, 作为第三个参数传参
+                const childrenNodes = VNode.children && VNode.children.map(function (vNode) {
+                    return cloneVNode(vNode)
+                })
+                // 开始深度拷贝
+                const clonedNode = createElement(VNode.tag, 
+                VNode.data,
+                childrenNodes)
+                clonedNode.text = VNode.text
+                clonedNode.isComment = VNode.isComment
+                clonedNode.componentOptions = VNode.componentOptions
+                clonedNode.elm = VNode.elm
+                clonedNode.context = VNode.context
+                clonedNode.ns = VNode.ns
+                clonedNode.isStatic = VNode.isStatic
+                clonedNode.key = VNode.key
+                return clonedNode
+            }
+            const clonedSlots = cloneVNode(this.$slots.default[0])
+            console.log(this.$slots.default[0])
+            console.log(clonedSlots)
+            return createElement('div', [this.$slots.default, clonedSlots])
+        }
+    })
+    // 实例化对象
+    const app = new Vue({
+        el: '#app'
+    })
+</script>
+</html>

@@ -1,5 +1,37 @@
 <!-- TODO: 1. domProps 和 attrs 的区别 -->
 <!-- TODO: 2. createElement 中的 props 和组件中直接使用的 props 之间的区别 -->
+
+<!-- TOC -->
+- [第九章 render 函数](#%E7%AC%AC%E4%B9%9D%E7%AB%A0-render-%E5%87%BD%E6%95%B0)
+  - [什么是Virtual DOM](#%E4%BB%80%E4%B9%88%E6%98%AFvirtual-dom)
+    - [VNode](#vnode)
+      - [tag](#tag)
+      - [data](#data)
+      - [children](#children)
+      - [text](#text)
+      - [elm](#elm)
+      - [ns](#ns)
+      - [content](#content)
+      - [functionalContext](#functionalcontext)
+      - [key](#key)
+      - [componentOptions](#componentoptions)
+      - [child](#child)
+      - [parent](#parent)
+      - [raw](#raw)
+      - [isStatic](#isstatic)
+      - [isRootInsert](#isrootinsert)
+      - [isComment](#iscomment)
+      - [isCloned](#iscloned)
+      - [isonce](#isonce)
+    - [VNode 的分类](#vnode-%E7%9A%84%E5%88%86%E7%B1%BB)
+  - [什么是 Render 函数](#%E4%BB%80%E4%B9%88%E6%98%AF-render-%E5%87%BD%E6%95%B0)
+  - [creatElememnt](#createlememnt)
+    - [基本用法](#%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95)
+    - [关于 render 函数的一些约束](#%E5%85%B3%E4%BA%8E-render-%E5%87%BD%E6%95%B0%E7%9A%84%E4%B8%80%E4%BA%9B%E7%BA%A6%E6%9D%9F)
+    - [使用 JS 代替模板功能](#%E4%BD%BF%E7%94%A8-js-%E4%BB%A3%E6%9B%BF%E6%A8%A1%E6%9D%BF%E5%8A%9F%E8%83%BD)
+      - [`v-if`](#v-if)
+      - [v-for](#v-for)
+
 # 第九章 render 函数
 ## 什么是Virtual DOM
 Virtual DOM 并不是真正意义上的 DOM, 而是一个轻量级的 JavaScript 对象, 在状态发生改变的时候, Virtual DOM 会进行`Diff`运算, 来更新只需要被替换的 DOM, 而不是全部都进行重绘.
@@ -350,6 +382,7 @@ var app = new Vue({
   el: '#app'
 })
 ```
+<!-- TODO: 插入代码链接 4. 重复的 VNode 作为 Array 传入第三个参数.hml-->
 * 带组件的 slot
   * 深度克隆节点.(其实就是为了不让数组里指向同一个引用)
 ```JavaScript
@@ -386,4 +419,96 @@ Vue.component('ele', {
   const clonedNodes = cloneVNode(vNodes)
   return createElement('div', [vNodes, clonedNodes])
 })
+```
+<!-- TODO: 插入代码链接 5. 重复的带组件的 slot.html -->
+### 使用 JS 代替模板功能
+不能使用`v-if` 和 `v-for`
+#### `v-if`
+
+```html
+<div id="app">
+  <ele :show="show">
+    <button @click="show = !show">  切换 show </button>
+  </ele>
+</div>
+<script>
+  Vue.component('ele', {
+    render: function (createElement) {
+      if (this.show) {
+        return createElement('p', 'show 的值是 true')
+      }
+      else {
+        return createElement('p', 'show 的值是 false')
+      }
+    },
+    props: {
+      show: {
+        type: Boolean, 
+        required: true,
+        default: true
+      }
+    }
+  })
+  // 实例化
+  const app = new Vue({
+    el: '#app',
+    data: {
+      show: false
+    }
+  })
+</script>
+```
+<!-- TODO: 插入代码链接 6.v-if.html -->
+#### v-for
+```html
+     <div id="app">
+         <ele :list="list"></ele>
+         <button @click= 'handleClick'>切换 list</button>
+     </div>
+</body>
+<script>
+const list1 = []
+const list2 = [
+  'Vue.js 实战',
+  'JS 实战',
+  'python 实战'
+]
+Vue.component('ele', {
+  props: {
+    list: {
+      type: Array,
+      default: function () {
+        return []
+      }
+    }
+  },
+  render: function (createElement) {
+    if(this.list.length){
+      nodes = this.list.map(function (item) {
+        return createElement('p', item)
+      })
+        return createElement('ul', nodes)
+    }
+    else {
+      return createElement('p', '列表为空')
+    }
+  }
+})
+const app = new Vue({
+  el: '#app',
+  data: {
+    list: list1
+  },
+  methods: {
+    handleClick: function () {
+      if (this.list === list1) {
+        this.list = list2
+      }
+      else {
+        this.list = list1
+      }
+    }
+  }
+})
+</script>
 ```
