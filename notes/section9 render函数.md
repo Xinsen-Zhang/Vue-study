@@ -547,3 +547,14 @@ const app = new Vue({
   * `this.level` => `context.props.level`
   * `this.$slots.default` => `context.children`
 <!-- TODO: 插入代码链接 11. select component via data inteligently.html -->
+> 注意:三个组件对象都接收了一个`props: data`. 在组件 `ele` 中也有`props:data`, 此时通过 `getComponent()` 来确定具体选择哪一个组件进行渲染.
+> 将 `getComponent()`的结果作为一个组件选项的对象传入`createElement`的第一个参数当中, 这时候通过把`data`作为 props 传给第二个参数, 这样子就可以传递给更里面的组件.
+> 函数化组件的一个解决方法是可以用指令`is`进行替代
+
+函数化组件主要适用于以下的两种情况
+1. 程序化的在多个组件中选择一个
+2. 再将`children`, `props`, `data` 传递给子组件之前操作它们
+
+
+<!-- ## JSX  -->
+<!-- TODO: JSX 相关内容的补全 -->
