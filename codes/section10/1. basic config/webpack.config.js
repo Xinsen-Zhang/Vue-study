@@ -1,4 +1,6 @@
 var path = require('path')
+// var ExtractTextPlugin = require('extract-text-webpack-plugin')
+var MiniCssExtractPlugin = require('mini-css-extract-plugin')
 var config = {
     // 入口的设置
     entry: {
@@ -23,12 +25,25 @@ var config = {
                 // 正则表达式来确定文件. require 和 import
                 test: /\.css$/,
                 // loader 的使用, 字符串或者数组. 数组从后往前
+                // use: [
+                //     'style-loader',
+                //     'css-loader'
+                // ]
                 use: [
-                    'style-loader',
+                    {
+                        loader: MiniCssExtractPlugin.loader,
+                    },
                     'css-loader'
                 ]
             }
         ]
-    }
+    },
+    // 插件配置
+    plugins: [
+        // new ExtractTextPlugin("main.js")
+        new MiniCssExtractPlugin({
+            filename: 'main.css',
+        })
+    ]
 }
 module.exports = config
