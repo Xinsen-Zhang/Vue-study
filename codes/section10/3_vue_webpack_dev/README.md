@@ -166,4 +166,4 @@ module.exports = {
 比如多写几个组件
 在`/src/components`写组件
 * `mkdir /src/components`
-* 具体可见以下链接
+* 具体可见[笔者的 github](https://github.com/Xinsen-Zhang/Vue-study/tree/master/codes/section10/3_vue_webpack_dev)
