@@ -1,5 +1,6 @@
 var path = require('path')
 var MiniCssExtractPlugin = require('mini-css-extract-plugin')
+var VueLoaderPlugin = require('vue-loader/lib/plugin')
 
 var config = {
     entry: {
@@ -17,7 +18,7 @@ var config = {
                 loader: 'vue-loader',
                 options: {
                     loaders: {
-                        css: MiniCssExtractPlugin.loader
+                        css: 'vue-style-loader'
                     }
                 }
             },
@@ -30,14 +31,13 @@ var config = {
             // css 文件的 loader
             {
                 test: /\.css$/,
-                loader: MiniCssExtractPlugin.loader
+                // loader: MiniCssExtractPlugin.loader
+                loader: 'css-loader'
             }
         ]
     },
     plugins: [
-        new MiniCssExtractPlugin({
-            filename: 'main.css'
-        })
+        new VueLoaderPlugin()
     ]
 }
 
