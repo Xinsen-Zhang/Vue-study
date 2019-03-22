@@ -12,5 +12,9 @@ function appendDiv() {
     div.innerText = 'for background test';
     div.className = 'bg2';
     document.body.append(div);
+    div = document.createElement('div');
+    div.innerText = '123更新了';
+    div.className = 'box';
+    document.body.append(div);
 }
 appendDiv();

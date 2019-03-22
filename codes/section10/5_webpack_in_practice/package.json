@@ -4,9 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "export NODE_ENV=none && npx webpack --config ./config/webpack.base.js",
-    "dev": "export NODE_ENV=development && npx webpack --config ./config/webpack.dev.js",
-    "build": "export NODE_ENV=production && npx webpack --hide-modules --config ./config/webpack.prod.js"
+    "test"  : "export NODE_ENV=none && npx webpack --config ./config/webpack.base.js",
+    "dev"   : "export NODE_ENV=development && npx webpack --config ./config/webpack.dev.js",
+    "build" : "export NODE_ENV=production && npx webpack --hide-modules --config ./config/webpack.prod.js",
+    "watch" : "export NODE_ENV=development && npx webpack --watch --config ./config/webpack.dev.js"
   },
   "keywords": [],
   "author": "",
