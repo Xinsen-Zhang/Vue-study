@@ -1,7 +1,7 @@
 var config = require('./webpack.base');
 var merge = require('webpack-merge');
 
-module.exports = merge(config, {
+var devConf = merge(config, {
     module:{
         rules: [
             {
@@ -24,4 +24,6 @@ module.exports = merge(config, {
             
         ]
     }
-})
+});
+
+module.exports = devConf;

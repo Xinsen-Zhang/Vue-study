@@ -15,11 +15,11 @@ var prodConfig =  merge(config, {
                 MiniCssExtractPlugin.loader,
                 {
                     loader: 'css-loader',
-                    options:{sourceMap: true}
+                    options:{sourceMap: false}
                 },
                 {
                     loader: 'sass-loader',
-                    options: {sourceMap: true}
+                    options: {sourceMap: false}
                 }
             ]
         }, 

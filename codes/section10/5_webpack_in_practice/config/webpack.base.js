@@ -77,6 +77,10 @@ var config = {
         // clean files
         new CleanWebpackPlugin()
     ]
+};
+
+if (isProd) {
+    config.devtool = 'inline-source-map';
 }
 
 module.exports = config;
