@@ -1,5 +1,6 @@
 var config = require('./webpack.base');
 var merge = require('webpack-merge');
+var webpack = require('webpack');
 
 var devConf = merge(config, {
     module: {
@@ -22,7 +23,15 @@ var devConf = merge(config, {
                 }
             ]
         }, ]
-    }
+    },
+    devServer: {
+        contentBase: './dist',
+        hot: true
+    },
+    plugins: [
+        new webpack.HotModuleReplacementPlugin(),
+        new webpack.NamedModulesPlugin()
+    ]
 });
 
 module.exports = devConf;
