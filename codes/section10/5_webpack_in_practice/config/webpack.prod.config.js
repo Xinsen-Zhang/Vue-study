@@ -2,6 +2,7 @@ var config = require('./webpack.base.config');
 var merge = require('webpack-merge');
 var MiniCssExtractPlugin = require('mini-css-extract-plugin');
 var OptimizeCssAssetsWebpackPlugin = require('optimize-css-assets-webpack-plugin');
+var UglifyJsWebpackPlugin = require('uglifyjs-webpack-plugin');
 
 module.exports = merge(config, {
     mode: 'production',
@@ -28,6 +29,11 @@ module.exports = merge(config, {
         })
     ],
     optimization:{minimizer:[
-        new OptimizeCssAssetsWebpackPlugin({})
+        new OptimizeCssAssetsWebpackPlugin({}),
+        new UglifyJsWebpackPlugin({
+            cache: true,
+            parallel: true,
+            sourceMap: true
+        })
     ]}
 });
