@@ -1,6 +1,7 @@
 var config = require('./webpack.base.config');
 var merge = require('webpack-merge');
 var MiniCssExtractPlugin = require('mini-css-extract-plugin');
+var OptimizeCssAssetsWebpackPlugin = require('optimize-css-assets-webpack-plugin');
 
 module.exports = merge(config, {
     mode: 'production',
@@ -25,5 +26,8 @@ module.exports = merge(config, {
             filename: '[name].[hash].css',
             chunkFilename: '[id].[hash].css'
         })
-    ]
+    ],
+    optimization:{minimizer:[
+        new OptimizeCssAssetsWebpackPlugin({})
+    ]}
 });
