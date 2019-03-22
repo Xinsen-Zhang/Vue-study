@@ -14,7 +14,7 @@ function appendDiv() {
     div.className = 'bg2';
     document.body.append(div);
     div = document.createElement('div');
-    div.innerText = '123更新了';
+    div.innerText = '检测是否是热更新';
     div.className = 'box';
     document.body.append(div);
 }
