@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import './index.css';
-import './index.sass'
+import './index.sass';
 function appendDiv() {
     // let div = documment.createElement('div')
     var div = document.createElement('div');

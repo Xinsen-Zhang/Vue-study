@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "npx webpack --config ./config/webpack.base.config.js",
-    "dev": "npx webpack --config ./config/webpack.dev.config.js"
+    "dev": "npx webpack --config ./config/webpack.dev.config.js",
+    "build": "npx webpack --config ./config/webpack.prod.config.js"
   },
   "keywords": [],
   "author": "",
