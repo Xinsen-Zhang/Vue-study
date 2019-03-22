@@ -1,0 +1,24 @@
+{
+  "name": "5_webpack_in_practice",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "npx webpack --config ./config/webpack.base.config.js",
+    "dev": "npx webpack --config ./config/webpack.dev.config.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "css-loader": "^2.1.1",
+    "lodash": "^4.17.11",
+    "webpack": "^4.29.6",
+    "webpack-cli": "^3.3.0",
+    "webpack-merge": "^4.2.1",
+    "mini-css-extract-plugin": "^0.5.0"
+  },
+  "devDependencies": {
+    "style-loader": "^0.23.1"
+  }
+}
