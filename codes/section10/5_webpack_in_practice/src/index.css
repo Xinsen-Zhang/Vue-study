@@ -5,3 +5,11 @@
 .boxes {
     margin: 10px 0;
 }
+
+.bg1 {
+    background: url('../assets/images/test1.png');
+}
+
+.bg2 {
+    background: url('../assets/images/test.png');
+}

@@ -1,2 +1,1 @@
-var config = require('./config/webpack.prod.config')
-console.log(config);
+console.log(process.env.WEBPACK)
