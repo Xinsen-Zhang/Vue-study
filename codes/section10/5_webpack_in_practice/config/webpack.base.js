@@ -66,12 +66,17 @@ var config = {
                 test: /\.js$/,
                 // loader: 'babel-loader',
                 exclude: /(node_modules)/,
-                use: {
+                use: [{
                     loader: 'babel-loader',
                     options: {
                         cacheDirectory: true
                     }
-                }
+                },{
+                    loader: 'eslint-loader',
+                    options: {
+                        fix: true
+                    }
+                }]
             }
         ]
     },
