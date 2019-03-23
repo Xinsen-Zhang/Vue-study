@@ -16,6 +16,7 @@ module.exports = {
       NODE_ENV: false
     },
     rules: {
+      autoFixOnSave: true,
       // allow async-await
       'generator-star-spacing': 'off',
       // allow debugger during development

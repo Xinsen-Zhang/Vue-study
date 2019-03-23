@@ -1,5 +1,6 @@
 import _ from 'lodash';
-import './index.css';
+// import './index.css';
+import '@/index.css';
 import './index.sass';
 
 function appendDiv() {
@@ -20,3 +21,5 @@ function appendDiv() {
   console.log('hello world');
 }
 appendDiv();
+var a = '1';
+console.log(a);
