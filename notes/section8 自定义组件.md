@@ -30,6 +30,8 @@ Vue.directive('focus', {
     * unbind
         * 只调用一次, 指令与元素解绑时调用
 <!-- TODO: 插入代码链接 1. v-focus.html -->
+* 比如, v-focus 指令
+[v-focus 指令的代码在这儿!!](https://github.com/Xinsen-Zhang/Vue-study/blob/master/codes/section8/1.v-focus.html)
 * 钩子函数的参数
     * el
         * html 元素
@@ -55,3 +57,4 @@ Vue.directive('focus', {
     * 上一个 VNode
         * 仅在`update` 和 `componentUpdated` 中可用
     * `undefined`
+[代码的链接在这儿!!](https://github.com/Xinsen-Zhang/Vue-study/blob/master/codes/section8/2.%20v-message.html)
