@@ -3,12 +3,14 @@
 ### v-cloak
 * 它会在 Vue 实例结束编译时从绑定的`HTML`元素上移除,经常和`display: none`配合使用
 
-TODO : 插入代码 1. v-cloak.html
+<!-- TODO : 插入代码 1. v-cloak.html -->
+[代码链接在这儿!!](https://github.com/Xinsen-Zhang/Vue-study/blob/master/codes/section5/1.%20v-cloak.html)
 ### v-once
 * 定义它的元素或者组件只渲染一次,包括元素或组件的所有子节点
 * 首次渲染之后不在岁数据的变化重新渲染
     * 视作静态内容
-TODO: 插入代码 2.v-once.html
+<!-- TODO: 插入代码 2.v-once.html -->
+[代码链接在这儿!!](https://github.com/Xinsen-Zhang/Vue-study/blob/master/codes/section5/2.v-once.html)
 
 ## 条件渲染指令
 ### v-if,v-elseif, v-else
@@ -32,7 +34,8 @@ TODO: 插入代码 2.v-once.html
 </script>
 ```
 * 出于效率的原因,Vue 会尽可能的复用而不是重新渲染. 如果需要重新渲染, 则需要在元素/组件中加上`key`属性
-TODO 插入代码 3. key.html
+<!-- TODO 插入代码 3. key.html -->
+[代码链接在这儿!!](https://github.com/Xinsen-Zhang/Vue-study/blob/master/codes/section5/3.key.html)
 ### v-show
 * v-show的用法与 v-if类似
 * 并不是销毁, 而是添加内联样式:`display: none`
@@ -85,10 +88,12 @@ TODO 插入代码 3. key.html
 ### 过滤和排序
 * 当时在不想修改原数组的情况下则可以使用计算属性
 
-TODO: 插入代码 4.filterBooks.html
+<!-- TODO: 插入代码 4.filterBooks.html -->
+[代码链接在这儿!!](https://github.com/Xinsen-Zhang/Vue-study/blob/master/codes/section5/4.filterBooks.html)
 
 ## 方法与事件
-TODO: 插入代码 5. addClick.html
+<!-- TODO: 插入代码 5. addClick.html -->
+[代码链接在这儿!!](https://github.com/Xinsen-Zhang/Vue-study/blob/master/codes/section5/5.addClick.html)
 * 可以传入参数`@click=addHandle(10)`
 * 可以不传入参数`@click=addHandle()`
 * 可以用回调函数的形式绑定事件`@click=addHandle`
@@ -112,7 +117,8 @@ TODO: 插入代码 5. addClick.html
     })
 </script>
 ```
-TODO: 插入代码 6.$event.html
+<!-- TODO: 插入代码 6.$event.html -->
+[代码链接在这儿!!](https://github.com/Xinsen-Zhang/Vue-study/blob/master/codes/section5/6.%24event.html)
 
 ### 修饰符
 #### 事件修饰符
