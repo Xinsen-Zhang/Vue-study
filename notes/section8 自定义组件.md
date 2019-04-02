@@ -57,4 +57,4 @@ Vue.directive('focus', {
     * 上一个 VNode
         * 仅在`update` 和 `componentUpdated` 中可用
     * `undefined`
-[代码的链接在这儿!!](https://github.com/Xinsen-Zhang/Vue-study/blob/master/codes/section8/2.%20v-message.html)
+[代码的链接在这儿!!](https://github.com/Xinsen-Zhang/Vue-study/blob/master/codes/section8/2.%20v-message.html) 
