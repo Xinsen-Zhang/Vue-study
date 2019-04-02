@@ -1,41 +1,3 @@
-<!-- TODO: 1. domProps 和 attrs 的区别 -->
-<!-- TODO: 2. createElement 中的 props 和组件中直接使用的 props 之间的区别 -->
-
-<!-- TOC -->
-<!-- - [第九章 render 函数](#%E7%AC%AC%E4%B9%9D%E7%AB%A0-render-%E5%87%BD%E6%95%B0)
-  - [什么是Virtual DOM](#%E4%BB%80%E4%B9%88%E6%98%AFvirtual-dom)
-    - [VNode](#vnode)
-      - [tag](#tag)
-      - [data](#data)
-      - [children](#children)
-      - [text](#text)
-      - [elm](#elm)
-      - [ns](#ns)
-      - [content](#content)
-      - [functionalContext](#functionalcontext)
-      - [key](#key)
-      - [componentOptions](#componentoptions)
-      - [child](#child)
-      - [parent](#parent)
-      - [raw](#raw)
-      - [isStatic](#isstatic)
-      - [isRootInsert](#isrootinsert)
-      - [isComment](#iscomment)
-      - [isCloned](#iscloned)
-      - [isonce](#isonce)
-    - [VNode 的分类](#vnode-%E7%9A%84%E5%88%86%E7%B1%BB)
-  - [什么是 Render 函数](#%E4%BB%80%E4%B9%88%E6%98%AF-render-%E5%87%BD%E6%95%B0)
-  - [creatElememnt](#createlememnt)
-    - [基本用法](#%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95)
-    - [关于 render 函数的一些约束](#%E5%85%B3%E4%BA%8E-render-%E5%87%BD%E6%95%B0%E7%9A%84%E4%B8%80%E4%BA%9B%E7%BA%A6%E6%9D%9F)
-    - [使用 JS 代替模板功能](#%E4%BD%BF%E7%94%A8-js-%E4%BB%A3%E6%9B%BF%E6%A8%A1%E6%9D%BF%E5%8A%9F%E8%83%BD)
-      - [`v-if`](#v-if)
-      - [v-for](#v-for)
-      - [v-model](#v-model)
-      - [修饰符](#%E4%BF%AE%E9%A5%B0%E7%AC%A6)
-      - [slot 的备用分发内容](#slot-%E7%9A%84%E5%A4%87%E7%94%A8%E5%88%86%E5%8F%91%E5%86%85%E5%AE%B9)
-  - [函数化组件](#%E5%87%BD%E6%95%B0%E5%8C%96%E7%BB%84%E4%BB%B6) -->
-
 # 第九章 render 函数
 ## 什么是Virtual DOM
 Virtual DOM 并不是真正意义上的 DOM, 而是一个轻量级的 JavaScript 对象, 在状态发生改变的时候, Virtual DOM 会进行`Diff`运算, 来更新只需要被替换的 DOM, 而不是全部都进行重绘.
@@ -154,6 +116,7 @@ export interface VNodeData {
 <!-- RENDER MODULE -->
 ## 什么是 Render 函数
 <!-- TODO: 插入代码链接 1. fast in render function.html -->
+[render 函数快速体验的代码链接在这儿!!](https://github.com/Xinsen-Zhang/Vue-study/blob/master/codes/section9/1.%20fast%20in%20render%20function.html)
 ## creatElememnt
 ### 基本用法
 ```JavaScript
@@ -243,6 +206,7 @@ object = {
 ```
 * 实例
 <!-- TODO: 2. template version.html -->
+[template 版本的代码链接在这儿!!](https://github.com/Xinsen-Zhang/Vue-study/blob/master/codes/section9/2.%20template%20version.html)
 如果使用 template
 ```html
 <div id="app">
@@ -273,6 +237,7 @@ object = {
         });
 ```
 <!-- TODO: 3. render version .html -->
+[render 版本的代码链接在这儿!!](https://github.com/Xinsen-Zhang/Vue-study/blob/master/codes/section9/3.%20render%20version.html)
 使用 render 函数的话
 ```JavaScript
 Vue.component('ele', {
@@ -387,8 +352,12 @@ var app = new Vue({
 })
 ```
 <!-- TODO: 插入代码链接 4. 重复的 VNode 作为 Array 传入第三个参数.hml-->
+[重复的 VNode 作为 Array 传入第三个参数的代码链接!!](https://github.com/Xinsen-Zhang/Vue-study/blob/master/codes/section9/4.%E9%87%8D%E5%A4%8D%E7%9A%84%20VNode%20%E4%BD%9C%E4%B8%BA%20Array%20%E4%BC%A0%E5%85%A5%E7%AC%AC%E4%B8%89%E4%B8%AA%E5%8F%82%E6%95%B0.html)
+
 * 带组件的 slot
   * 深度克隆节点.(其实就是为了不让数组里指向同一个引用)
+
+
 ```JavaScript
 Vue.component('child', {
   render: function (createElement) {
@@ -424,9 +393,14 @@ Vue.component('ele', {
   return createElement('div', [vNodes, clonedNodes])
 })
 ```
+
 <!-- TODO: 插入代码链接 5. 重复的带组件的 slot.html -->
+[重复的带组件的 slot 的代码链接在这儿!!](https://github.com/Xinsen-Zhang/Vue-study/blob/master/codes/section9/5.%20%E9%87%8D%E5%A4%8D%E7%9A%84%E5%B8%A6%20%E7%BB%84%E5%BB%BA%E7%9A%84slot.html)
+
 ### 使用 JS 代替模板功能
+
 不能使用`v-if` 和 `v-for`
+
 #### `v-if`
 
 ```html
@@ -463,6 +437,7 @@ Vue.component('ele', {
 </script>
 ```
 <!-- TODO: 插入代码链接 6.v-if.html -->
+[js 替代 v-if 的代码链接在这儿](https://github.com/Xinsen-Zhang/Vue-study/blob/master/codes/section9/6.%20v-if.html)
 #### v-for
 ```html
      <div id="app">
@@ -516,8 +491,12 @@ const app = new Vue({
 })
 </script>
 ```
+
+[js 替代 v-for 的代码链接在这儿!!](https://github.com/Xinsen-Zhang/Vue-study/blob/master/codes/section9/7.%20v-for.html)
+
 #### v-model
 `render`里面也没有 `v-model`的api
+[js 替代 v-model 语法糖的代码链接在这儿!!](https://github.com/Xinsen-Zhang/Vue-study/blob/master/codes/section9/8.%20v-model.html)
 #### 修饰符
 修饰符也无法使用, 需要使用句柄
 <!-- TODO: 事件冒泡和事件捕获 -->
@@ -535,10 +514,13 @@ const app = new Vue({
 |.once | ~ | 只触发一次 |
 |.capture.once 或者 .once.capture | ~! | 第一次事件捕获时触发 |
 <!-- TODO: 插入代码 9. chatting imitation.html -->
+比如, 现在可以完善一个简单的聊天室的功能的页面
+[聊天模拟的代码链接在这儿!!](https://github.com/Xinsen-Zhang/Vue-study/blob/master/codes/section9/9.%20chatting%20imitation.html)
 #### slot 的备用分发内容
 如果slot为空, 在使用 `template` 的时候,可以在 `template` 中添加默认分发的备用内容. 可是如果使用`render`的话, 需要使用 js 进行逻辑判断, 不能直接定义备用的分发内容了
 * `this.$slots.default === undefined` => 组件中, 未命名的(默认) slot 没有被使用
 <!-- TODO: 插入代码 10. spare dispatch content in slot.html -->
+[slot 的备用分发内容的代码链接在这儿!!](https://github.com/Xinsen-Zhang/Vue-study/blob/master/codes/section9/10.%20spare%20dispatch%20content%20in%20slot.html)
 
 
 ## 函数化组件
@@ -547,6 +529,9 @@ const app = new Vue({
   * `this.level` => `context.props.level`
   * `this.$slots.default` => `context.children`
 <!-- TODO: 插入代码链接 11. select component via data inteligently.html -->
+[通过数据智能选择组件的 render 函数的代码链接在这儿!!(html)](https://github.com/Xinsen-Zhang/Vue-study/blob/master/codes/section9/11.%20select%20the%20component%20via%20data%20intelligently.html)
+[通过数据智能选择组件的 render 函数的代码链接在这儿!!(js)](https://github.com/Xinsen-Zhang/Vue-study/blob/master/codes/section9/11.js)
+
 > 注意:三个组件对象都接收了一个`props: data`. 在组件 `ele` 中也有`props:data`, 此时通过 `getComponent()` 来确定具体选择哪一个组件进行渲染.  
 > 将 `getComponent()`的结果作为一个组件选项的对象传入`createElement`的第一个参数当中, 这时候通过把`data`作为 props 传给第二个参数, 这样子就可以传递给更里面的组件.  
 > 函数化组件的一个解决方法是可以用指令`is`进行替代  
