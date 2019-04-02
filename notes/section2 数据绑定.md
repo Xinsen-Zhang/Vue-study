@@ -2,7 +2,8 @@
 * 快速体验数据的双向绑定
     * 在输入框内输入名字,下面的地方会实时响应输入的内容
 
-TODO: 插入体验链接
+<!-- TODO: 插入体验链接 -->
+[代码链接在这儿!!](https://github.com/Xinsen-Zhang/Vue-study/blob/master/codes/section2/1.%20fast%20in.html)
 
 ## Vue 实例与数据绑定
 ### 实例与数据
@@ -14,7 +15,7 @@ TODO: 插入体验链接
         * 也可以是`CSS Selector`
         * 挂在成功之后可以通过`app.$el`来访问元素
 
-TODO: v-model
+[代码链接在这儿!](https://github.com/Xinsen-Zhang/Vue-study/blob/master/codes/section2/1.%20fast%20in.html)
 
 ### 生命周期
 * 类似于`JQuery`中的`ready`
@@ -65,7 +66,7 @@ const app = new Vue({
 ```
 * 插值的内容也可以是实时响应的
 
-TODO: 插入链接
+[代码链接在这儿!!](https://github.com/Xinsen-Zhang/Vue-study/blob/master/codes/section2/2.%20real%20tile%20response.html)
 
 * 可以使用`v-html`输出 html
 * 可以使用`v-pre`跳过双大括号的编译
@@ -76,12 +77,12 @@ TODO: 插入链接
     * 简单的运算
     * 三元运算符等
 
-TODO : 插入插值可以是表达式的链接
+[代码链接在这儿!!!](https://github.com/Xinsen-Zhang/Vue-study/blob/master/codes/section2/3.%20express.html)
 
 ### 过滤器
 * 可以在插值`{{}}`的尾部加上管道符`|`对数据进行过滤
 
-TODO: 插入过滤器的链接
+[代码链接在这儿!!](https://github.com/Xinsen-Zhang/Vue-study/blob/master/codes/section2/4.%20filters.html)
 
 * 过滤器还可以串联`{{message | filterA | filterB}}`
 * 过滤器还可以接收参数`{{message | filterA('arg1', 'arg2')}}`
@@ -94,7 +95,8 @@ TODO: 插入过滤器的链接
 
 指令的一些例子
 * `v-if`
-TODO: 见 v-if 代码
+<!-- TODO: 见 v-if 代码 -->
+[代码链接在这儿!!](https://github.com/Xinsen-Zhang/Vue-study/blob/master/codes/section2/5.%20v-if.html)
 *  `v-html`
     * 子 `HTMLElement` 的代码
 * `v-pre`
@@ -102,11 +104,13 @@ TODO: 见 v-if 代码
 *  `v-bind`
     * 动态更新 HTML 节点上的属性的值
     * 简写`:`
-    * TODO: `v-bind` 代码链接
+    <!-- * TODO: `v-bind` 代码链接 -->
+    [代码链接在这儿!!](https://github.com/Xinsen-Zhang/Vue-study/blob/master/codes/section2/5.v-bind.html)
 * `v-on`
     * Vue 实例监听的事件行为
     * 简写 `@`
-    * TODO: `v-on` 代码链接
+    <!-- * TODO: `v-on` 代码链接 -->
+    [代码链接在这儿!!](https://github.com/Xinsen-Zhang/Vue-study/blob/master/codes/section2/6.v-on.html)
     * 也可以直接是一个内联语句
     ```html
     <button @click="show = false">点击隐藏</button>
