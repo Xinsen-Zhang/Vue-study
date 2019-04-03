@@ -9,6 +9,11 @@
     <div>
       随机数是: {{randomNum}}
     </div>
+    <!-- <div>-----分隔符-----</div> -->
+    <br/>
+    <div>vuex 中的 list: {{list}}</div>
+    <div>vuex 中的 filteredList: {{filteredList}}</div>
+    <div>vuex 中的 sortedAndFilteredList: {{sortedAndFilteredList}}</div>
   </div>
 </template>
 
@@ -22,6 +27,15 @@ export default {
   computed: {
     count () {
       return this.$store.state.count
+    },
+    list () {
+      return this.$store.state.list
+    },
+    filteredList () {
+      return this.$store.getters.filteredList
+    },
+    sortedAndFilteredList () {
+      return this.$store.getters.sortedAndFilteredList
     }
   },
   methods: {

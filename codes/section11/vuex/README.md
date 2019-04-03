@@ -136,4 +136,9 @@ handleReduce () {
 > 在 mutations 中尽量不要异步操作数据, 因为在组件 commit 之后, 数据不能立即发生改变, 而且不知道什么时候才会发生改变.
 
 ## 高级用法
+
 `Vuex` 主要有以下三种高级用法, `getters`, `actions`, `modules`
+
+### getters
+
+getters 相当于 Vuex 的计算属性, 也是 store 的一个字段
