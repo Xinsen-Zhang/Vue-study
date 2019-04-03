@@ -15,6 +15,13 @@ vue init webpack router-router
 
 ## 一些配置的修改
 
+修改 `/config/index.js`中的配置项, 使得在 `npm run dev` 的时候自动打开浏览器.
+
+```diff
+-   autoOpenBrowser: false,
++   autoOpenBrowser: true
+```
+
 
 ## 编译过程
 
