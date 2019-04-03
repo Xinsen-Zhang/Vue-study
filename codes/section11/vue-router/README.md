@@ -121,3 +121,49 @@ export default {
 }
 ```
 <!--  TODO: user.vue 组件的代码链接的插入 -->
+
+## 跳转
+
+在使用 `vue-router` 的时候, 有两种可以跳转的方式. 一种是使用内置的`<router-link>` 组件, 另一种是使用 JS 进行跳转
+
+### `<router-link>` 组件实现跳转
+
+`<router-link>` 是一个内置的组件, 会被渲染成一个`<a>`标签.这个功能我在`/src/components/index.vue` 中实现了
+<!-- TODO: 插入 index.vue 的代码链接 -->
+
+```html
+<router-link to="/about">跳转到 about</router-link>
+```
+
+> to 是一个 `prop`, 能够用`v-bind` 进行绑定
+
+在 HTML5 的 History 模式下, 会拦截点击.`<router-link>` 中还有其他的一些重要的 prop
+
+* tag
+  * tag 可以指定渲染的是一个什么样的标签. e.g. `<router to="index" tag="li">` 渲染出来的就是一个`<li>`标签, 而不是`<a>` 标签
+* replace
+  * 使用`replace` 不会留在`History`记录, 所以跳转后不能使用后退键返回上一个页面
+* active-class
+  * 当`router-link`对应的路由成功匹配的时候, 会自动给当前匹配的元素设置一个`router-link-active` 的 class, 设置 `prop:active-class`可以修改默认的名称.
+
+上述三个 prop, 我在`/src/components/user.vue` 中实现了两个功能.
+<!-- TODO: 插入 user.vue 的代码链接 -->
+
+### JS 实现跳转
+通过`router`实例的方法, 来达到类似以改变 `window.location.href` 实现跳转的方法
+
+```js
+    this.$router.push('/user/123456');
+```
+上述功能我在`/src/components/about.vue` 中实现了
+<!-- TODO : 插入 about.vue 的代码链接-->
+
+还有一些其他的方法.
+
+* replace
+  * `this.$router.replace('index')`
+  * 类似呀`router-link` 的 replace prop
+* go
+  * `this.$router.go(n)`
+  * 页面跳转, n 可正可负, 必须是一个整数
+  * 类似以 `window.history.go()`
