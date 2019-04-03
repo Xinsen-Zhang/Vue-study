@@ -61,10 +61,11 @@ var store = new Vuex.Store({
 export default store
 ```
 
-在`/src/App.vue` 中将图片内容注释掉
+在/src/[App.vue](https://github.com/Xinsen-Zhang/Vue-study/blob/master/codes/section11/vuex/src/App.vue)中将图片内容注释掉
+
 <!-- TODO: 插入 App.vue 的代码链接 -->
 
-在`/src/main.js` 中引入`/src/store/index.js` 并且注册到视图模型中
+在 src/[main.js](https://github.com/Xinsen-Zhang/Vue-study/blob/master/codes/section11/vuex/src/main.js) 中引入/src/store/[index.js](https://github.com/Xinsen-Zhang/Vue-study/blob/master/codes/section11/vuex/src/store/index.js) 并且注册到视图模型中
 <!-- TODO: 插入 main.js 的代码链接 -->
 
 ## 基本用法
@@ -78,7 +79,7 @@ var state = {
 }
 ```
 
-同时, 新建一个 `index.vue` 的组件(`/src/component/index.vue`), 使用`store`实例读取 Vuex 管理的状态.
+同时, 新建一个 [index.vue](https://github.com/Xinsen-Zhang/Vue-study/blob/master/codes/section11/vuex/src/components/index.vue) 的组件(`/src/component/index.vue`), 使用`store`实例读取 Vuex 管理的状态.
 
 <!-- TODO: 插入 index.vue 的代码链接 -->
 
