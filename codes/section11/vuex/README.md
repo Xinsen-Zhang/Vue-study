@@ -141,4 +141,137 @@ handleReduce () {
 
 ### getters
 
-getters 相当于 Vuex 的计算属性, 也是 store 的一个字段
+getters 相当于 Vuex 的计算属性, 也是 store 的一个字段  
+比如, 可以有以下的例子.
+首先, 现在 state 中增加以下的数据.
+
+```diff
+var state = {
+  count: 0,
++ list: [1, 43, 9, 5, 8, 32, 1, -1, 2, 13]
+}
+```
+
+然后, 设置 getters 字段.
+
+```js
+var getters = {
+  filteredList: state => {
+    return state.list.filter(value => value < 10)
+  }
+}
+```
+
+这时候, 在组件中, 就可以访问 getters 字段中的值了
+```js
+this.$store.getters.filteredList
+```
+
+同时, getters 不仅可以依赖`state`, 也能依赖其它的 getters.e.g.
+
+```js
+var getters = {
+  filteredList: state => {
+    return state.list.filter(value => value < 10)
+  },
+  sortedAndFilteredList: (state, getters) => {
+    return getters.filteredList.sort((a, b) => {
+      if (a > b) {
+        return 1
+      } else if (a < b) {
+        return -1
+      } else {
+        return 0
+      }
+    })
+  }
+}
+```
+
+其中, `sortedAndFilteredList` 依赖于 `filteredList`
+
+### actions
+
+`actions` 字段主要处理的是业务逻辑, 比如, 在 `mutations` 并不建议使用异步操作, 但是异步操作可以在 `actions` 字段中执行, 通过 `dispatch` 来分发 `actions` (触发 `mutations`).  e.g. 
+
+```js
+var actions = {
+  increment (context) {
+    context.commit('increment')
+  }
+}
+```
+
+再比如, 可以在`actions`字段中, 增加异步的操作. e.g.
+
+```js
+{
+  asnycIncrement (context) {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        context.commit('increment')
+        resolve()
+      }, 1000)
+    })
+  }
+}
+```
+
+然后, 可以在组件中通过分发 actions  
+
+```js
+this.$store.dispatch('increment')
+```
+
+> 对 `actions` 和 `mutations` 稍加总结, 不难得出, 所有设计改变数据的, 就用 `mutations`, 存在业务逻辑的, 就用 `actions`
+
+### modules
+
+modules 字段的作用是将 store 分割到不同的模块. 当项目足够大的时候, store 里的 state, getters, mutations, actions会非常多, 都放在一个 js 文件中显得不是特别的友好, 使用 modules 能够将它们分割到不同的文件中. 每个 modules 都有自己的 state, getters, modules, actions, 并且可以多层嵌套. e.g.
+
+```js
+// moduleA
+const moduleA = {
+    state: {...},
+    mutations: {...},
+    getters: {...},
+    actions: {...}
+}
+
+// moduleB
+const moduleB = {
+    state: {...},
+    mutations: {...},
+    getters: {...},
+    actions: {...}
+}
+
+// 实例化 store
+const store = new Vuex.Store({
+    modules: {
+        a: moduleA,
+        b: moduleB
+    }
+})
+```
+
+此时, 
+```js
+store.state.a // moduleA 的状态
+store.sate.b // moduleB 的状态
+```
+
+module 的 mutations 和 getters 接收的第一个参数都是当前模块的状态. 在 actions 和 getters 中还能接收一个参数 `rootState` 来访问根节点的状态. 比如, getters 的第三个参数
+
+```js
+const moduleA = {
+    state: {
+        count: 0
+    },
+    getters: {
+        sumCount (state, getters, rootState) {
+            return rootState.count + state.count
+        }
+    }
+}
+```

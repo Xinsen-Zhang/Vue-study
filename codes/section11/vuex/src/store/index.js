@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import { rejects } from 'assert';
 
 // load the plugin
 Vue.use(Vuex)
@@ -17,6 +18,20 @@ var mutations = {
   },
   decrement (state, params) {
     state.count -= params.num
+  }
+}
+
+var actions = {
+  increment (context) {
+    context.commit('increment')
+  },
+  asnycIncrement (context) {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        context.commit('increment')
+        resolve()
+      }, 1000)
+    })
   }
 }
 
@@ -40,7 +55,8 @@ var getters = {
 var store = new Vuex.Store({
   state,
   mutations,
-  getters
+  getters,
+  actions
 })
 
 export default store
