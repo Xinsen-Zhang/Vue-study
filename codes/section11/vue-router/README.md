@@ -37,9 +37,12 @@ npm run dev
 
 在`/src/components` 中新建两个组件, `index.vue` 和 `about.vue`
 <!-- TODO: 插入 index.vue 和 about.vue 的代码链接 -->
+[index.vue 的代码链接在这儿!!](https://github.com/Xinsen-Zhang/Vue-study/blob/master/codes/section11/vue-router/src/components/index.vue)  
+[about.vue 的代码链接在这儿!!](https://github.com/Xinsen-Zhang/Vue-study/blob/master/codes/section11/vue-router/src/components/about.vue)
 
 在`/src/App.vue` 中将图片内容注释掉
 <!-- TODO: 插入 App.vue 的代码链接 -->
+[App.vue 的代码链接在这儿!!](https://github.com/Xinsen-Zhang/Vue-study/blob/master/codes/section11/vue-router/src/App.vue)
 
 ## vue-router 的基本用法
 
@@ -120,6 +123,8 @@ export default {
   }
 }
 ```
+
+[user.vue 的代码链接在这儿!!](https://github.com/Xinsen-Zhang/Vue-study/blob/master/codes/section11/vue-router/src/components/user.vue)
 <!--  TODO: user.vue 组件的代码链接的插入 -->
 
 ## 跳转
@@ -128,7 +133,7 @@ export default {
 
 ### `<router-link>` 组件实现跳转
 
-`<router-link>` 是一个内置的组件, 会被渲染成一个`<a>`标签.这个功能我在`/src/components/index.vue` 中实现了
+`<router-link>` 是一个内置的组件, 会被渲染成一个`<a>`标签.这个功能我在[index.vue](https://github.com/Xinsen-Zhang/Vue-study/blob/master/codes/section11/vue-router/src/components/index.vue)中实现了
 <!-- TODO: 插入 index.vue 的代码链接 -->
 
 ```html
@@ -146,7 +151,7 @@ export default {
 * active-class
   * 当`router-link`对应的路由成功匹配的时候, 会自动给当前匹配的元素设置一个`router-link-active` 的 class, 设置 `prop:active-class`可以修改默认的名称.
 
-上述三个 prop, 我在`/src/components/user.vue` 中实现了两个功能.
+上述三个 prop, 我在 [user.vue](https://github.com/Xinsen-Zhang/Vue-study/blob/master/codes/section11/vue-router/src/components/user.vue) 中实现了两个功能.
 <!-- TODO: 插入 user.vue 的代码链接 -->
 
 ### JS 实现跳转
@@ -155,7 +160,7 @@ export default {
 ```js
     this.$router.push('/user/123456');
 ```
-上述功能我在`/src/components/about.vue` 中实现了
+上述功能我在 [about.vue](https://github.com/Xinsen-Zhang/Vue-study/blob/master/codes/section11/vue-router/src/components/about.vue) 中实现了
 <!-- TODO : 插入 about.vue 的代码链接-->
 
 还有一些其他的方法.
@@ -230,5 +235,5 @@ router.beforeEach((to, from, next) => {
 
 > next()的参数为`false`的时候可以取消导航, 并且设置页面进行跳转
 
-上述除了登录之外的业务, 我都在`/src/router/index.js` 中进行了实现.
+上述除了登录之外的业务, 我都在 src/router/[index.js](https://github.com/Xinsen-Zhang/Vue-study/blob/master/codes/section11/vue-router/src/router/index.js) 中进行了实现.
 <!-- TODO: 插入代码router/index.js 的链接 -->
