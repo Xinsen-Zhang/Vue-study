@@ -1,4 +1,4 @@
-# vue-router
+# vue-router 入门记录
 
 > 这是一个利用 vue-cli 搭建的简单的项目, 项目建立的主要目的是为了记录一些 Vue-router 的学习过程
 
@@ -167,3 +167,68 @@ export default {
   * `this.$router.go(n)`
   * 页面跳转, n 可正可负, 必须是一个整数
   * 类似以 `window.history.go()`
+
+## 高级用法
+
+通过钩子函数, 进行一些业务的实现.
+常用的钩子函数, `beforeEach` 和 `afterEach`, 它们会在路由即将改变前和即将改变后触发.  
+比如可以实现以下业务
+
+### 网页标题的修改
+
+首先给每个 路由映射添加标题数据.e.g.
+```js
+{
+  path: '/index',
+  name: 'index',
+  meta: {
+    title: '首页'
+  },
+  // component: index
+  component: (resolve) => require(['@/components/index'], resolve)
+}
+```
+
+然后利用钩子函数`beforeEach` 进行网页标题的修改.
+
+```js
+router.beforeEach((to, from, next) => {
+  window.document.title = to.meta.title
+  next()
+})
+```
+
+导航钩子有三个参数
+* to
+  * 即将要进入的目标的路有对象
+* from
+  * 即将要离开的导航页的路有对象
+* next
+  * 调用该方法, 可以进入下一个钩子
+
+### 跳转页面的时候, 页面跳转到顶部
+
+```js
+router.afterEach((to, from, next) => {
+  window.scrollTo(0, 0)
+  next()
+})
+```
+
+### 登录的验证
+
+```js
+router.beforeEach((to, from, next) => {
+  if (window.localStorage.getItem('token')) {
+    next()
+  }
+  else {
+    next('/login')
+  }
+})
+```
+
+> next()的参数为`false`的时候可以取消导航, 并且设置页面进行跳转
+
+上述除了登录之外的业务, 我都在`/src/router/index.js` 中进行了实现.
+<!-- TODO: 插入代码router/index.js 的链接 -->
